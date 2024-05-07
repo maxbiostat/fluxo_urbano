@@ -78,8 +78,8 @@ Como as estimativas dos parâmetros mudam?
 
 ## Referências
 
-- Chaves, Júlio César, Moacyr AHB da Silva, Ricardo de Souza Alencar, Alexandre G. Evsukoff, and Vinícius da Fonseca Vieira. [Human mobility and socioeconomic datasets of the Rio de Janeiro metropolitan area.](https://doi.org/10.1016/j.dib.2023.109695) Data in brief 51 (2023): 109695.
-- Lima Santos, Leonardo Bacelar, Luiz Max Carvalho, Wilson Seron, Flávio C. Coelho, Elbert E. Macau, Marcos G. Quiles, and Antônio M. V. Monteiro. [How do urban mobility (geo) graph’s topological properties fill a map?](https://doi.org/10.1007/s41109-019-0211-7). Applied Network Science 4 (2019): 1-14.
+- Chaves, J. C. &  da Silva, M.A.H.B. &  Alencar, R.S. &  Evsukoff, A.G &  Vieira, V.F. [Human mobility and socioeconomic datasets of the Rio de Janeiro metropolitan area.](https://doi.org/10.1016/j.dib.2023.109695) Data in brief 51 (2023): 109695.
+- Santos, L. B.L. &  Carvalho, L.M. & Seron, W. & Coelho, F.C & Macau, E.E. &  Quiles, M.G. &  Monteiro, A.M.V. [How do urban mobility (geo) graph’s topological properties fill a map?](https://doi.org/10.1007/s41109-019-0211-7). Applied Network Science 4 (2019): 1-14.
 -  Evans, M. J., & Rosenthal, J. S. (2018). [Probability and Statistics - The Science of Uncertainty](https://www.utstat.toronto.edu/mikevans/jeffrosenthal/). CRC press. (Cap 10).
 -   Dobson, A. J., & Barnett, A. G. (2018). [An introduction to generalized linear models](https://books.google.com.br/books/about/An_Introduction_to_Generalized_Linear_Mo.html?id=YOFstgEACAAJ&redir_esc=y). CRC press. (Caps 3, 4 e 5)
 -   Gelman, A., Hill, J., & Vehtari, A. (2020). [Regression and other stories](https://avehtari.github.io/ROS-Examples/). Cambridge University Press. (Cap 15)
