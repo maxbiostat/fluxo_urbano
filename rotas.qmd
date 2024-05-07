@@ -1,0 +1,85 @@
+---
+title: "Análise e planejamento estatístico de rotas"
+author: ""
+format:
+  pdf:
+    mathspec: true
+    fig-pos: H
+---
+
+::: hidden
+```{=tex}
+\def\pr{\operatorname{Pr}}
+\def\vr{\operatorname{Var}}
+\def\cv{\operatorname{Cov}}
+\def\bY{\boldsymbol{Y}}
+\def\bX{\boldsymbol{X}}
+\def\by{\boldsymbol{y}}
+\def\bx{\boldsymbol{x}}
+\def\bb{\boldsymbol{\beta}}
+\def\sM{\bar{X}_n}
+\def\indep{\perp \!\!\! \perp}
+```
+:::
+
+# Introdução
+
+A análise de rotas tem grande potencial para identificar pontos de vulnerabilidade em um rede de mobilidade urbana.
+Com o advento dos dados de torres de telefones celulares, dispomos hoje de dados ricos sobre padrões de movimento urbano através de dados de origem-destido (OD).
+Nesta lição prática, vamos utilizar análise estatística exploratória e modelos estatísticos para analisar rotas de mobilidade urbana em uma importante região metropolitana do Brasil.
+
+# Análise de rotas : dados origem-destino
+
+Nesta seção vamos analisar dados de origem-destino apresentados em  [Chaves et al. (2023)](https://doi.org/10.1016/j.dib.2023.109695).
+Em essência, os dados descrevem o número de indivíduos que viajam entre duas localidades em um determinado período (no nosso caso, um dia).
+Além disso, temos a distância entre duas localidades medida de três formas diferentes: distância euclidiana, distância a pé (_walking_) e distância de carro (_driving_).
+Temos também as populações de cada área -- ver modelo gravitacional abaixo.
+
+## O modelo gravitacional
+
+Mais detalhes em [Santos et al. (2019)](https://doi.org/10.1007/s41109-019-0211-7).
+
+Seja $F_{ij}$ o fluxo entre duas áreas (nós) $i$ e $j$, e sejam $P_i$ e $P_j$ suas respectivas populações.
+Por fim, seja $d_{ij}$ a distância entre os nós.
+
+O modelo gravitacional diz que 
+
+\begin{equation}
+F_{ij} = \alpha \cdot \frac{P_i \cdot P_j }{\left(d_{ij}\right)^\gamma},
+\end{equation}
+
+onde $\alpha$ e $\gamma$ são parâmetros livres a serem estimados.
+Nos exercícios propostos abaixo, você vai ajustar este modelo aos dados através de uma transformação que torna o problema de ajuste um problema de regressão.
+
+##  Modelos lineares generalizados (GLM)
+
+Sejam $\bY = (Y_1, \ldots, Y_n)$ e $\bX$ o vetor de variáveis dependentes e a matriz ($n \times P$) de desenho, respectivamente. 
+Defina $\mu_i(\bX) = \mu_i := E[Y_i \mid \bX]$ como a média condicional de cada $Y_i$.
+Em um GLM, escrevemos 
+\begin{equation}
+\label{eq:glm_I}
+g(\mu_i) = \bX\bb,
+\end{equation}
+onde $g()$ é a chamada *função de ligação*, e é uma função monotônica e diferenciável.
+Por exemplo, quando $Y_i \in \{0, 1\}$, isto é, quando temos dados binários, podemos usar $g(\theta) = \log(\theta/(1-\theta))$ ou $g(\theta) = \Phi^{-1}(\theta)$, onde $\Phi^{-1}$ é a CDF inversa de uma distribuição normal padrão.
+Além disso quando temos dados de contagem ($Y_i \in \{0, 1, \ldots\}$) distribuídos Poisson -- por exemplo --, é de costume usar $g(\theta) = \log(\theta)$.
+
+### Análise dirigida
+
+1. Carregue os dados e investigue sua forma e dimensões.
+2. Calcule as porcentagens de zeros em cada variável.
+3. Filtre as entradas do banco correspodentes às entradas fora da diagonal na matriz origem-destino.
+4. Investigue a correlação entre as variáveis de distância.
+5. Sob o modelo gravitacional, mostre o que acontece quando consideramos a transformação $Z_i = \log(Y_i)$ e regredimos $\boldsymbol{Z}$ em $\bX$. 
+6. Ajuste o modelo transformado aos dados discutidos acima. Alguma das distâncias dá resultados melhores?
+Como as estimativas dos parâmetros mudam?
+7. Avalie a qualidade do ajuste dos modelos ajustados. 
+8. Desenhe uma estratégia para avaliar o poder preditivo dos modelos em novas amostras.
+
+## Referências
+
+- Chaves, Júlio César, Moacyr AHB da Silva, Ricardo de Souza Alencar, Alexandre G. Evsukoff, and Vinícius da Fonseca Vieira. [Human mobility and socioeconomic datasets of the Rio de Janeiro metropolitan area.](https://doi.org/10.1016/j.dib.2023.109695) Data in brief 51 (2023): 109695.
+- Lima Santos, Leonardo Bacelar, Luiz Max Carvalho, Wilson Seron, Flávio C. Coelho, Elbert E. Macau, Marcos G. Quiles, and Antônio M. V. Monteiro. [How do urban mobility (geo) graph’s topological properties fill a map?](https://doi.org/10.1007/s41109-019-0211-7). Applied Network Science 4 (2019): 1-14.
+-  Evans, M. J., & Rosenthal, J. S. (2018). [Probability and Statistics - The Science of Uncertainty](https://www.utstat.toronto.edu/mikevans/jeffrosenthal/). CRC press. (Cap 10).
+-   Dobson, A. J., & Barnett, A. G. (2018). [An introduction to generalized linear models](https://books.google.com.br/books/about/An_Introduction_to_Generalized_Linear_Mo.html?id=YOFstgEACAAJ&redir_esc=y). CRC press. (Caps 3, 4 e 5)
+-   Gelman, A., Hill, J., & Vehtari, A. (2020). [Regression and other stories](https://avehtari.github.io/ROS-Examples/). Cambridge University Press. (Cap 15)
